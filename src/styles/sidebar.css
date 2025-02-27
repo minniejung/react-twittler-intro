@@ -1,0 +1,29 @@
+.sidebar {
+  /* position: fixed; */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  overflow-y: auto;
+  padding: 1rem 2.5rem;
+}
+
+.sidebar-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 2.2rem;
+}
+
+.sidebar-icons svg {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.sidebar-icons svg:hover {
+  color: #1d9bf0;
+}
