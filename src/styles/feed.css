@@ -59,6 +59,10 @@
   color: var(--tweeter-blue);
   cursor: pointer;
   width: 100%;
+
+  span {
+    margin: 0 5px;
+  }
 }
 
 .tweetActions {
