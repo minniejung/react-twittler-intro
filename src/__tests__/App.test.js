@@ -160,7 +160,7 @@ import { Tweets } from "../components/Tweets";
 // 여기부터는 Advanced Challenge 테스트입니다. xdescribe를 describe로 바꾸고 테스트를 진행해보세요.
 // 필수 과제는 아닙니다.
 
-xdescribe("Advanced Challenge", () => {
+describe("Advanced Challenge", () => {
   test("Font Awesome을 npm으로 설치해야 합니다. (@fortawesome/react-fontawesome)", async () => {
     let haveFontAwesomeFree = false;
     let haveReactFontAwesome = false;
@@ -188,7 +188,7 @@ xdescribe("Advanced Challenge", () => {
   describe("App.js Notification", () => {
     describe("App.js Notification Icon", () => {
       test("Font Awesome을 활용한 알림 아이콘이 있어야 합니다.", () => {
-        const { container } = render(<App dummyTweets={[]} />);
+        const { container } = render(<Sidebar dummyTweets={[]} />);
         const notificationIcon = container.querySelector(".far.fa-bell");
 
         expect(notificationIcon).not.toBeNull();
@@ -201,7 +201,7 @@ xdescribe("Advanced Challenge", () => {
   describe("App.js Notifications", () => {
     test("알림 아이콘을 클릭하면 알림이 보여야 합니다.", () => {
       const { container, queryByText } = render(
-        <App
+        <Sidebar
           dummyTweets={[...dummyTweets.slice(0, 1)]}
           dummyNotice={dummyNotice}
         />
@@ -210,16 +210,16 @@ xdescribe("Advanced Challenge", () => {
       const notificationIcon = container.querySelector(".fa-bell");
       userEvent.click(notificationIcon);
 
-      const notification = container.querySelector(".notification");
+      const notification = container.querySelector(".notificationContent");
       const notificationMessage = queryByText(/^Elon Mask/g);
 
       expect(notification).toContainElement(notificationMessage);
-      expect(notificationMessage).toHaveClass("notification__message");
+      expect(notificationMessage).toHaveClass("notifUserName");
     });
 
     test("알림 아이콘을 클릭하고, 트윗 아이콘을 클릭하면 다시 트윗을 보여줘야 합니다.", () => {
       const { container, queryByText } = render(
-        <App
+        <Sidebar
           dummyTweets={[...dummyTweets.slice(0, 1)]}
           dummyNotice={dummyNotice}
         />
@@ -228,14 +228,14 @@ xdescribe("Advanced Challenge", () => {
       const notificationIcon = container.querySelector(".far.fa-bell");
       userEvent.click(notificationIcon);
 
-      const notification = container.querySelector(".notification");
+      const notification = container.querySelector(".notificationContent");
       const notificationMessage = queryByText(/^Elon Mask/g);
 
       expect(notification).toContainElement(notificationMessage);
-      expect(notificationMessage).toHaveClass("notification__message");
+      expect(notificationMessage).toHaveClass("notifUserName");
 
-      const tweetIcon = container.querySelector(".far.fa-comment-dots");
-      userEvent.click(tweetIcon);
+      const closeIcon = container.querySelector(".closeBtn");
+      userEvent.click(closeIcon);
 
       const tweet = container.querySelector(".tweet");
       const tweetMessage = queryByText(
@@ -250,7 +250,7 @@ xdescribe("Advanced Challenge", () => {
       describe("알림 한 개가 주어진 경우", () => {
         test("하나의 알림이 보여야 합니다.", () => {
           const { container, queryByText } = render(
-            <App
+            <Sidebar
               dummyTweets={[...dummyTweets.slice(0, 1)]}
               dummyNotice={dummyNotice}
             />
@@ -259,7 +259,7 @@ xdescribe("Advanced Challenge", () => {
           const notificationIcon = container.querySelector(".far.fa-bell");
           userEvent.click(notificationIcon);
 
-          const notifications = container.querySelector(".notifications");
+          const notifications = container.querySelector(".notificationContent");
           const notificationMessage = queryByText(/^Elon Mask/g);
 
           expect(notifications).toContainElement(notificationMessage);
@@ -269,7 +269,7 @@ xdescribe("Advanced Challenge", () => {
       describe("알림 세 개가 주어진 경우", () => {
         test("세 개의 알림이 보여야 합니다.", () => {
           const { container, queryByText } = render(
-            <App
+            <Sidebar
               dummyTweets={[...dummyTweets.slice(0, 1)]}
               dummyNotice={dummyNotice}
             />
@@ -278,7 +278,8 @@ xdescribe("Advanced Challenge", () => {
           const notificationIcon = container.querySelector(".far.fa-bell");
           userEvent.click(notificationIcon);
 
-          const notifications = container.querySelector(".notifications");
+          const notifications = container.querySelector(".notifUserName");
+          console.log("dasfsadfdsa", notifications);
           const notificationMessage0 = queryByText(/^Elon Mask/g);
           const notificationMessage1 = queryByText(/^Steve Jubs/g);
           const notificationMessage2 = queryByText(/^Linkun Perk/g);
